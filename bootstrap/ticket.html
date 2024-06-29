@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Movie Ticket Display</title>
+  <style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #0b0a0a;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* height: 100vh; */
+    margin: 0;
+  }
+
+  .ticket-container {
+    top:20%;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column; /* Change to column */
+    min-width: 1000px; /* Increased minimum width */
+    margin: 20px;
+    height: 10%;
+  }
+
+  .ticket {
+    background-image: url('./images/tic.jpg');
+    background-size: cover;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 900px; /* Increased ticket width */
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px; /* Add space between tickets */
+    background-size: 100% 100%;
+    margin-left: 20px; /* Added margin-left */
+    margin-top:40px; /* Added margin-left */
+  }
+
+  .movie-image {
+    position: relative;
+    width: 150px;
+    /* height: 100% 100%; */
+  }
+
+  .barcode {
+    position: absolute;
+    top: 270px;
+    margin-left:13%;
+    width: 270px;
+    height: 40px;
+  
+  }
+
+  .content {
+    padding: 20px;
+    width: 100%;
+  }
+
+  .header1 {
+    margin-left: 500px;
+    color: red;
+  }
+
+  .title1 {
+    margin: 5px 0;
+  }
+
+  .subtitle1 {
+    margin-left: 50px;
+    color: white;
+    font-size: larger;
+  }
+
+  .details12 {
+    margin-bottom: 20px;
+  }
+
+  .detail12 {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+  }
+
+  .label {
+    padding-top: 20px;
+    font-weight: bold;
+    color: white;
+    margin-left: 350px;
+  }
+
+  .value {
+    color: white;
+    padding-right: 20px;
+    padding-top: 20px;
+  }
+
+  .price {
+    margin: 0;
+    font-size: 1.2em;
+    color: #333;
+  }
+  .container161 {
+      width: 250px;
+      display: flex;
+      flex-direction: column;
+      position: fixed;
+      top: 60px;
+      left: 0px;
+      height: calc(100vh - 60px);
+      overflow-y: auto;
+      border: 1px solid white;
+          
+          
+      }
+
+      .sidebar151 {
+          box-shadow: 0px 0px 10px #b3b6b6;
+          width: 50%;
+          background: white;
+          padding: 10px 20px;
+          margin-top: 10% ;
+          margin-left: 20% ;
+          color:red;
+          
+          
+        }
+        .sidebar161 {
+          box-shadow: 0px 0px 10px #b3b6b6;
+          margin-left: 20% ;
+          width: 50%;
+          background:white;
+          padding: 10px 20px;
+          margin-top:20px;
+          color:red;
+        }
+        .sidebar171 {
+          margin-left: 20% ;
+          box-shadow: 0px 0px 10px #b3b6b6;
+          width: 50%;
+          background:white;
+          padding: 10px 20px;
+          margin-top:20px;
+          color: red;
+      }
+     
+
+      .dropdown-label {
+          justify-content: space-between;
+          align-items: center;
+          cursor: pointer;
+          margin-bottom: 5px;
+      }
+
+      .dropdown-input {
+          display: none;
+      }
+
+      .dropdown-content {
+          display: none;
+          border-radius: 5px;
+          background-color: #EEEAEA;
+          padding: 10px;
+          margin-top: 10px;
+          gap: 10px;
+      }
+
+      .dropdown-content label {
+          cursor: pointer;
+      }
+
+      .dropdown-input:checked + .dropdown-content {
+          display: flex;
+          flex-direction: column;
+      }
+
+      input[type="checkbox"] {
+          display: none;
+      }
+
+      #content1 h2 {
+          color: navy;
+      }
+  </style>
+</head>
+<body>
+  <div class="container161">
+    <div class="left-box161">
+        <h2>Filter</h2>
+        <div class="sidebar151">
+            <label for="toggle-intro-1" class="dropdown-label">Language</label>
+            <input type="checkbox" id="toggle-intro-1" class="dropdown-input">
+            <div class="dropdown-content">
+                <label >Tamil</label>
+                <label >English</label>
+                <label >Malayalam</label>
+                <label >Telugu</label>
+                <label >Hindi</label>
+                <label >Kannadam</label>
+            </div>
+    </div>
+    <div class="sidebar161">
+        <label for="toggle-intro-2" class="dropdown-label">Genre</label>
+        <input type="checkbox" id="toggle-intro-2" class="dropdown-input">
+        <div class="dropdown-content">
+            <label >Drama</label>
+            <label >Action</label>
+            <label >Sci-fiction</label>
+            <label >Sports</label>
+            <label >Horror</label>
+            <label >Anime</label>
+        </div>
+    </div>
+    <div class="sidebar171">
+        <label for="toggle-intro-3" class="dropdown-label">Timing</label>
+        <input type="checkbox" id="toggle-intro-3" class="dropdown-input">
+        <div class="dropdown-content">
+            <label >1:30pm</label>
+            <label >4:30ppm</label>
+            <label >7:30pm</label>
+            <label >10:30pm</label>
+           
+        </div>
+    </div>
+</div>
+</div>
+  <div class="ticket-container">
+    <!-- First Ticket -->
+    <div class="ticket">
+      <div class="movie-image">
+        <img class="barcode" src="./images/bar.jpeg" alt="Barcode">
+      </div>
+      <div class="content">
+        <div class="header1">
+          <h1 class="title1">Movie Ticket</h1>
+          <p class="subtitle1">Leo</p>
+        </div>
+        <div class="details12">
+          <div class="detail12">
+            <span class="label">Date & Time:</span>
+            <span class="value">30th March 2024, 7:00 PM</span>
+          </div>
+          <div class="detail12">
+            <span class="label">Location:</span>
+            <span class="value">Cinema City</span>
+          </div>
+          <div class="detail12">
+            <span class="label">Seat:</span>
+            <span class="value">A1</span>
+          </div>
+          <div class="detail12">
+            <span class="label">Price:</span>
+            <span class="value">100</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ticket">
+      <div class="movie-image">
+        <img class="barcode" src="./images/bar.jpeg" alt="Barcode">
+      </div>
+      <div class="content">
+        <div class="header1">
+          <h1 class="title1">Movie Ticket</h1>
+          <p class="subtitle1">Leo</p>
+        </div>
+        <div class="details12">
+          <div class="detail12">
+            <span class="label">Date & Time:</span>
+            <span class="value">30th March 2024, 7:00 PM</span>
+          </div>
+          <div class="detail12">
+            <span class="label">Location:</span>
+            <span class="value">Cinema City</span>
+          </div>
+          <div class="detail12">
+            <span class="label">Seat:</span>
+            <span class="value">A1</span>
+          </div>
+          <div class="detail12">
+            <span class="label">Price:</span>
+            <span class="value">100</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ticket">
+      <div class="movie-image">
+        <img class="barcode" src="./images/bar.jpeg" alt="Barcode">
+      </div>
+      <div class="content">
+        <div class="header1">
+          <h1 class="title1">Movie Ticket</h1>
+          <p class="subtitle1">Leo</p>
+        </div>
+        <div class="details12">
+          <div class="detail12">
+            <span class="label">Date & Time:</span>
+            <span class="value">30th March 2024, 7:00 PM</span>
+          </div>
+          <div class="detail12">
+            <span class="label">Location:</span>
+            <span class="value">Cinema City</span>
+          </div>
+          <div class="detail12">
+            <span class="label">Seat:</span>
+            <span class="value">A1</span>
+          </div>
+          <div class="detail12">
+            <span class="label">Price:</span>
+            <span class="value">100</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Second Ticket -->
+   
+    
+  </div>
+</body>
+</html>

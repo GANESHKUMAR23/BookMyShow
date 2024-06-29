@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../CSS/main.css">
+    <title>Edit Movie</title>
+    <style>
+        /* Add any custom styles here */
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <i class='bx bxs-camera-movie' style='color:#ed0c0c'></i>
+        </div>
+        <form>
+            <input type="text" placeholder="Search...">
+        </form>
+        <select name="location" id="location">
+            <option value="location1">Location 1</option>
+            <option value="location2">Location 2</option>
+            <option value="location3">Location 3</option>
+        </select>
+        <a href="profile.html" class="usee"><i class='bx bx-user-circle' style='color:#ffffff'></i></a>
+    </nav>
+    <div class="container10">
+        <div class="left-box10">
+            <h2>Filter</h2>
+            <div class="sidebar11">
+                <label for="toggle-intro-1" class="dropdown-label">Movie management</label>
+                <input type="checkbox" id="toggle-intro-1" class="dropdown-input">
+                <div class="dropdown-content">
+                    <label ><a href="adminhome.html">Movies</a></label>
+                </div>
+            </div>
+            <div class="sidebar12">
+                <label for="toggle-intro-2" class="dropdown-label">Report Management</label>
+                <input type="checkbox" id="toggle-intro-2" class="dropdown-input">
+                <div class="dropdown-content">
+                    <label ><a href="moviesdetails.html">Movie Details</a></label>
+                    <label ><a href="customerdetails.html">Customer Details</a></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container11">
+        <h2>Edit Movie</h2>
+        <form id="editMovieForm">
+            <label for="description">Description:</label><br>
+            <input type="text" id="description" name="description"><br>
+            <label for="title">Title:</label><br>
+            <input type="text" id="title" name="title"><br>
+            <label for="genre">Genre:</label><br>
+            <input type="text" id="genre" name="genre"><br>
+            <label for="language">Language:</label><br>
+            <input type="text" id="language" name="language"><br><br>
+            <button type="submit">Save Changes</button>
+        </form>
+    </div>
+
+    <!-- <script>
+        // Function to retrieve movie details from URL parameters
+        function getMovieDetailsFromUrl() {
+            const queryString = window.location.search;
+            const urlParams = new URLSearchParams(queryString);
+            const id = parseInt(urlParams.get('id'));
+            return id;
+        }
+
+        // Function to populate form with movie details
+        function populateForm() {
+            const id = getMovieDetailsFromUrl();
+            const movieDetails = getMovieDetailsById(id);
+            if (movieDetails) {
+                document.getElementById('description').value = movieDetails.description;
+                document.getElementById('title').value = movieDetails.title;
+                document.getElementById('genre').value = movieDetails.genre;
+                document.getElementById('language').value = movieDetails.language;
+            } else {
+                console.error('Movie not found!');
+            }
+        }
+
+        // Function to fetch movie details based on ID
+        function getMovieDetailsById(id) {
+            var movies = JSON.parse(localStorage.getItem('movies'));
+            return movies.find(movie => movie.id === id);
+        }
+
+        // Function to update movie details
+        function updateMovie(event) {
+            event.preventDefault();
+            const id = getMovieDetailsFromUrl();
+            var movies = JSON.parse(localStorage.getItem('movies'));
+            var movieIndex = movies.findIndex(movie => movie.id === id);
+            if (movieIndex !== -1) {
+                movies[movieIndex].description = document.getElementById('description').value;
+                movies[movieIndex].title = document.getElementById('title').value;
+                movies[movieIndex].genre = document.getElementById('genre').value;
+                movies[movieIndex].language = document.getElementById('language').value;
+                localStorage.setItem('movies', JSON.stringify(movies));
+                window.location.href = 'moviesdetails.html'; // Redirect back to main page
+            } else {
+                console.error('Movie not found!');
+            }
+        }
+
+        // Populate form with movie details
+        populateForm();
+
+        // Add event listener for form submission
+        document.getElementById('editMovieForm').addEventListener('submit', updateMovie);
+    </script> -->
+</body>
+</html>

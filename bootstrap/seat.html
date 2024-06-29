@@ -1,0 +1,301 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+<link rel="Stylesheet" href="../CSS/main.css">
+<title>Theater Booking</title>
+<style>
+    .box{
+        display: flex;
+        height: 100px;
+    }
+    .header{
+        width: 400px;
+        height: 100px;
+        gap: 10px;
+    }
+    .total{
+        padding-left: 50px;
+        margin: 0;
+        width: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items:first baseline;
+    }
+    .tdiv{
+        display: flex;
+        gap: 10px;
+    }
+    .timing-button{
+        width: auto;
+    }
+    
+    .footer button{
+        position: absolute;
+        bottom: 70px;
+        left: 500px;
+    }
+    .seat {
+        width: 25px;
+        height: 25px;
+        background-color: #ccc;
+        border-radius: 5px;
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black;
+        font-weight: 550;
+        background: wheat;
+    }
+    .seat:hover{
+        color: white;
+    }
+    .seat span{
+        font-size: 10px;
+    }
+    .seating_order{
+        width: 100%;
+        height: 500px;
+        margin-top: 50px;
+        display: flex;
+        justify-content: space-around;
+        grid-area: 20px;
+    }
+    .seating-box{
+        display: grid;
+        grid-template-columns: repeat(8, 20px);
+        grid-gap: 15px;
+    }
+    .screen{
+        position: static;
+        padding: 0;
+        margin-top: 100px;
+        width: 90%;
+        height: 15px;
+        background: white;
+        box-shadow: 0 0 5px white;
+    }
+    
+</style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <span> book
+                <i class='bx bxs-camera-movie' style='color:#ed0c0c'  ></i>
+                ticket.com</span>
+            
+        </div>
+        <form>
+            <input type="text" placeholder="Search...">
+        </form>
+        <select name="location" id="location">
+            <option value="location1">Location 1</option>
+            <option value="location2">Location 2</option>
+            <option value="location3">Location 3</option>
+        </select>
+       
+    </nav>
+    
+    <div class="container31">
+        <div class="left-box31">
+            <h2>Filter</h2>
+            <div class="sidebar32">
+                <label for="toggle-intro-1" class="dropdown-label">Language</label>
+                <input type="checkbox" id="toggle-intro-1" class="dropdown-input">
+                <div class="dropdown-content">
+                    <label >Tamil</label>
+                    <label >English</label>
+                    <label >Malayalam</label>
+                    <label >Telugu</label>
+                    <label >Hindi</label>
+                    <label >Kannadam</label>
+                </div>
+        </div>
+        <div class="sidebar33">
+            <label for="toggle-intro-2" class="dropdown-label">Genre</label>
+            <input type="checkbox" id="toggle-intro-2" class="dropdown-input">
+            <div class="dropdown-content">
+                <label >Drama</label>
+                <label >Action</label>
+                <label >Sci-fiction</label>
+                <label >Sports</label>
+                <label >Horror</label>
+                <label >Anime</label>
+            </div>
+        </div>
+        <div class="sidebar34">
+            <label for="toggle-intro-3" class="dropdown-label">Timing</label>
+            <input type="checkbox" id="toggle-intro-3" class="dropdown-input">
+            <div class="dropdown-content">
+                <label >1:30pm</label>
+                <label >4:30ppm</label>
+                <label >7:30pm</label>
+                <label >10:30pm</label>
+               
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="container32">
+       <div class="box">
+            <div class="header">
+                <div class="time" id="time"></div>                
+            </div>
+            <div class="total">
+                <div class="tdiv"><div id="ticketDiv">Ticket </div><span id="ticket">0</span></div>
+                <div class="tdiv"><div>Amount </div><span id="amount">0</span></div>
+            </div>
+       </div>
+        
+        <div class="seating_order">
+            <div class="seating-box seating-box1">     
+            </div>
+            <div class="seating-box seating-box2">
+            </div>
+            <div class="seating-box seating-box3">
+            </div>
+        </div>
+        <div class="screen"></div>
+        <div class="footer">
+            <button type="button" onclick="proceedBill()">Proceed for payment</button>
+        </div>
+    </div>
+    
+
+    <script>
+
+        let ticket = document.getElementById("ticket");
+        let amount = document.getElementById("amount");
+        
+
+
+        let UrlParams = new URLSearchParams(window.location.search);
+
+        let time = UrlParams.get("time");
+        let date = UrlParams.get("date");
+        let theatre = UrlParams.get("theatre");
+
+        let header = document.querySelector(".header");
+        let headerDiv = document.createElement("div");
+        headerDiv.classList.add("theatre-name");
+        headerDiv.innerText = theatre;
+        header.prepend(headerDiv);
+
+        let time_container = document.getElementById("time");
+
+        let div1 = document.createElement("div");
+        div1.classList.add("timing-button");
+        div1.innerText = time;
+
+        let div2 = document.createElement("div");
+        div2.classList.add("timing-button");
+        div2.innerText = date;
+
+        time_container.append(div1);
+        time_container.append(div2);
+
+
+        let seating_box1 = document.querySelector(".seating-box1");
+        let seating_box2 = document.querySelector(".seating-box2");
+        let seating_box3 = document.querySelector(".seating-box3");
+
+
+
+        let letter = "A";
+        let count = 1;
+        for(var i=0;i<112;i++){
+            let seatDiv = document.createElement("div");
+            seatDiv.classList.add("seat");
+            if(i%16 === 0 && i !== 0){
+                letter = String.fromCharCode(letter.charCodeAt()+1);
+                count = 1;     
+            }
+            let val = letter+(count++);
+            let span = document.createElement("span");
+            span.innerText = val;
+            seatDiv.setAttribute("seatNo",val);
+            seatDiv.appendChild(span);       
+            seating_box1.append(seatDiv);
+        }
+
+        letter = "H";
+        count = 1;
+        for(var i=0;i<112;i++){
+            let seatDiv = document.createElement("div");
+            seatDiv.classList.add("seat");
+            if(i%16 === 0 && i !== 0){
+                letter = String.fromCharCode(letter.charCodeAt()+1);
+                count = 1;     
+            }
+            let val = letter+(count++);
+            let span = document.createElement("span");
+            span.innerText = val;
+            seatDiv.setAttribute("seatNo",val);
+            seatDiv.appendChild(span);       
+            seating_box2.append(seatDiv);
+        }
+
+        letter = "O";
+        count = 1;
+        for(var i=0;i<112;i++){
+            let seatDiv = document.createElement("div");
+            seatDiv.classList.add("seat");
+            if(i%16 === 0 && i !== 0){
+                letter = String.fromCharCode(letter.charCodeAt()+1);
+                count = 1;     
+            }
+            let val = letter+(count++);
+            let span = document.createElement("span");
+            span.innerText = val;
+            seatDiv.setAttribute("seatNo",val);
+            seatDiv.appendChild(span);       
+            seating_box3.append(seatDiv);
+        }
+
+
+        var seats = document.querySelectorAll(".seat");
+        for(var i=0;i<seats.length;i++){
+            seats[i].addEventListener("click",function(){
+                this.classList.toggle("selected");
+                let seatSelect = document.querySelectorAll(".selected");
+                if(seatSelect.length>1){
+                    document.getElementById("ticketDiv").innerText = "Tickets";
+                }
+                ticket.innerText = seatSelect.length;
+                amount.innerText = seatSelect.length * 300 + " Rupees";
+
+            })
+        }
+
+        function proceedBill(){
+
+            var selectedSeat = document.querySelectorAll(".selected");
+            
+            let seatNumber = [];
+
+
+
+            for(var i=0;i<selectedSeat.length;i++){
+
+                seatNumber[i] = selectedSeat[i].getAttribute("seatNo");
+                
+            }
+
+            location.replace(`bill.html?date=${date}&time=${time}&theatre=${theatre}&seat=${seatNumber}&price=${amount.innerText}`);
+
+            
+
+        }
+
+        
+        
+        
+    </script>
+</body>
+</html>

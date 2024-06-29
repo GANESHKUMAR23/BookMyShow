@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="../CSS/main.css">
+    <title>Movie Details</title>
+    <style>
+        /* Add any custom styles here */
+        .bx-trash{
+            cursor: pointer;
+            color: #f90202;
+        }
+        .bx-edit{
+            cursor: pointer;
+            color: #6fad6f;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <i class='bx bxs-camera-movie' style='color:#ed0c0c'></i>
+        </div>
+        <form>
+            <input type="text" placeholder="Search...">
+        </form>
+        <select name="location" id="location">
+            <option value="location1">Location 1</option>
+            <option value="location2">Location 2</option>
+            <option value="location3">Location 3</option>
+        </select>
+        <a href="profile.html" class="usee"><i class='bx bx-user-circle' style='color:#ffffff'></i></a>
+    </nav>
+    <div class="container10">
+        <div class="left-box10">
+            <h2>Filter</h2>
+            <div class="sidebar11">
+                <label for="toggle-intro-1" class="dropdown-label">Movie management</label>
+                <input type="checkbox" id="toggle-intro-1" class="dropdown-input">
+                <div class="dropdown-content">
+                    <label ><a href="adminhome.html">Movies</a></label>
+                </div>
+            </div>
+            <div class="sidebar12">
+                <label for="toggle-intro-2" class="dropdown-label">Report Management</label>
+                <input type="checkbox" id="toggle-intro-2" class="dropdown-input">
+                <div class="dropdown-content">
+                    <label ><a href="moviesdetails.html">Movie Details</a></label>
+                    <label ><a href="customerdetails.html">Customer Details</a></label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container11">
+        <h2>Movie Details</h2>
+        <button type="button" onclick="AddMovie()">Add Movie</button>
+
+
+
+        <!-- <form id="addMovieForm" style="display: none;">
+            <label for="newDescription">Description:</label><br>
+            <input type="text" id="newDescription" name="newDescription"><br>
+            <label for="newTitle">Title:</label><br>
+            <input type="text" id="newTitle" name="newTitle"><br>
+            <label for="newGenre">Genre:</label><br>
+            <input type="text" id="newGenre" name="newGenre"><br>
+            <label for="newLanguage">Language:</label><br>
+            <input type="text" id="newLanguage" name="newLanguage"><br><br>
+            <button type="button" onclick="addNewMovie()">Add</button>
+        </form> -->
+
+
+        <table id="movieTable">
+            <thead>
+                <tr>
+                    <th>Description</th>
+                    <th>Title</th>
+                    <th>Genre</th>
+                    <th>Language</th>
+                    <th colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody id="movieTableBody">
+               
+            </tbody>
+        </table>
+
+    </div>
+
+    <script>
+         
+        // function loadContent()
+        // {
+            var movies = [...JSON.parse(localStorage.getItem("movieInfo"))];
+            var tableBody = document.getElementById('movieTableBody');
+
+            for(var rec in movies)
+            {
+                
+                let tr = document.createElement("tr");
+
+                let td1 = document.createElement("td");
+                td1.innerText = movies[rec]['movie']['description'];
+                tr.appendChild(td1);
+
+                let td2 = document.createElement("td");
+                td2.innerText = movies[rec]['movie']['title'];
+                tr.appendChild(td2);
+
+                let td3 = document.createElement("td");
+                td3.innerText = movies[rec]['movie']['genre'];
+                tr.appendChild(td3);
+
+                let td4 = document.createElement("td");
+                td4.innerText = movies[rec]['movie']['language'];
+                tr.appendChild(td4);
+
+                let td5 = document.createElement("td");
+                let i1 = document.createElement("i");
+                i1.classList.add("bx");
+                i1.classList.add("bx-edit");
+                i1.setAttribute("title",movies[rec]['movie']['title']);
+
+                let i2 = document.createElement("i");
+                i2.classList.add("bx");
+                i2.classList.add("bx-trash");
+                i2.setAttribute("email",movies[rec]['movie']['title']);
+
+                
+
+                td5.appendChild(i1);
+                td5.appendChild(i2);
+                tr.appendChild(td5);
+
+
+                tableBody.appendChild(tr);
+
+
+            }
+        // }
+
+
+        // ------------------------------------------------------
+        // document.querySelector(".bx-edit").addEventListener("click",function(){
+        //     location.replace("edit.html?id=1");
+
+        // })
+
+
+        var trash_btn = document.querySelectorAll(".bx-trash");
+
+        for(var i=0;i<trash_btn.length;i++)
+        {
+            console.log("click");
+            trash_btn[i].addEventListener("click",function(){
+
+                var moviesList = [...JSON.parse(localStorage.getItem("movieInfo"))];
+                let check = this.getAttribute("email");
+                
+                var newList = moviesList.filter(item=>item.movie.title !== check);
+
+                localStorage.removeItem("movieInfo");
+
+                for(var record in newList){
+
+                    let data = newList[record]['movie'];
+
+                    localStorage.setItem("movieInfo",
+                        JSON.stringify(
+                        [...JSON.parse(localStorage.getItem("movieInfo") || "[]"),
+                        {movie:data}
+                        ]
+                    ));
+
+                 }
+
+                console.log(newList);
+                window.location.reload();
+                
+
+
+
+            })
+        }
+
+        let edit_btn = document.querySelectorAll(".bx-edit");
+
+        for(var i=0;i<edit_btn.length;i++){
+
+            
+
+            edit_btn[i].addEventListener("click",function(){
+                window.location.href = `edit.html?title=${this.getAttribute("title")}`;
+            })
+
+        }
+        
+        function AddMovie(){
+            location.replace("add.html");
+        }
+
+        
+        
+
+    </script>
+
+    <!-- <script>
+        var movies = [
+            { id: 1, description: "Parthiban is a mild-mannered cafe owner in Kashmir, who fends off a gang of murderous thugs and gains attention from a drug cartel claiming he was once a part of them.", title: "Leo", genre: "Action", language: "Tamil" },
+            { id: 2, description: "Romantic comedy", title: "Notting Hill", genre: "Romance", language: "English" },
+            { id: 3, description: "Romantic comedy", title: "Notting Hill", genre: "Romance", language: "English" },
+            { id: 4, description: "Romantic comedy", title: "Notting Hill", genre: "Romance", language: "English" },
+            { id: 5, description: "Romantic comedy", title: "Notting Hill", genre: "Romance", language: "English" },
+            { id: 6, description: "Romantic comedy", title: "Notting Hill", genre: "Romance", language: "English" },
+            { id: 7, description: "Romantic comedy", title: "Notting Hill", genre: "Romance", language: "English" },
+            { id: 8, description: "Romantic comedy", title: "Notting Hill", genre: "Romance", language: "English" }
+        ];
+
+        
+        function displayMovies() {
+            var tableBody = document.getElementById('movieTableBody');
+            tableBody.innerHTML = ''; 
+
+            movies.forEach(function(movie) {
+                var newRow = document.createElement('tr');
+                newRow.innerHTML = `
+                    <td>${movie.description}</td>
+                    <td>${movie.title}</td>
+                    <td>${movie.genre}</td>
+                    <td>${movie.language}</td>
+                    <td>
+                        <i class='bx bx-edit' style='color:#6fad6f' onclick="edit_Movie()"></i>
+                        <i class='bx bx-trash' style='color:#f90202'  onclick="deleteMovie()"></i>
+                    </td>
+                `;
+                tableBody.appendChild(newRow);
+            });
+        }
+
+       
+        // function showAddMovieForm() {
+        //     document.getElementById('addMovieForm').style.display = 'block';
+        //     document.getElementById('movieTable').style.display='none';
+            
+        // }
+
+      
+       // Function to add a new movie
+    //    function addNewMovie() {
+    //        var newMovie = {
+    //            id: movies.length + 1,
+    //     description: document.getElementById('newDescription').value,
+    //     title: document.getElementById('newTitle').value,
+    //     genre: document.getElementById('newGenre').value,
+    //     language: document.getElementById('newLanguage').value
+    // };
+    // movies.push(newMovie);
+    // displayMovies();
+    // document.getElementById('addMovieForm').reset();
+    // document.getElementById('addMovieForm').style.display = 'none'; 
+    // document.getElementById('movieTable').style.display = 'block';
+    // }
+
+     
+        // function edit_Movie(title) {
+
+        //     location.replace("edit.html");
+            
+        //     // window.location.href = `edit9.html?id=${title}`;
+        // }
+
+      
+        // function deleteMovie(id) {
+        //     var index = movies.findIndex(function(movie) {
+        //         return movie.id === id;
+        //     });
+        //     if (index !== -1) {
+        //         movies.splice(index, 1);
+        //         displayMovies();
+        //     }
+        // }
+
+        // displayMovies();
+    </script> -->
+</body>
+</html>

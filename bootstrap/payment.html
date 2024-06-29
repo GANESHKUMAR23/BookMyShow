@@ -1,0 +1,42 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="Stylesheet" href="../CSS/main.css">
+    <title>Online Ticket Booking - Payment</title>
+    <style>
+        .payment-container{
+            width: 80%;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            margin-top:10%;
+        }
+        .body{
+            background-color: aquamarine;
+        }
+    </style>
+</head>
+<body>
+    <div class="payment-container">
+        <h2>Payment Information</h2>
+        <form >
+            <label for="payment_method">Select Payment Method:</label>
+            <select id="payment_method" name="payment_method" required>
+                <option value="cash.html">Cash</option>
+                <option value="upi.html">UPI</option>
+                <option value="credit_card">Credit Card</option>
+            </select>
+
+          
+
+            <input type="submit" value="Pay Now">
+        </form>
+    </div>
+</body>
+</html>

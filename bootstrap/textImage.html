@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="Stylesheet" href="../CSS/main.css">
+    <title>Admin Profile</title>
+    <style>
+       
+    </style>
+</head>
+<body>
+    <nav>
+      
+        <div class="logo">
+            <!-- <img src="C:\Users\Lenovo\Downloads\bookmyshow-removebg-preview (1).png" alt="BookMyShow Logo"> -->
+            <span> book
+                <i class='bx bxs-camera-movie' style='color:#ed0c0c'  ></i>
+                ticket.com</span> 
+        </div>
+        <form>
+            <input type="text" placeholder="Search...">
+        </form>
+        <select name="location" id="location">
+            <option value="location1">Location 1</option>
+            <option value="location2">Location 2</option>
+            <option value="location3">Location 3</option>
+        </select>
+        <a href="profile.html" class="usee"><i class='bx bx-user-circle' style='color:#ffffff'  ></i></a>
+    </nav>
+   
+    <div class="container6">
+        <div class="left-box6">
+            <h2>Filter</h2>
+            <div class="sidebar4">
+                <label for="toggle-intro-1" class="dropdown-label">Movie management</label>
+                <input type="checkbox" id="toggle-intro-1" class="dropdown-input">
+                <div class="dropdown-content">
+                    <label ><a href="adminhome.html">Movies</a></label>
+                   
+                </div>
+        </div>
+        <div class="sidebar5">
+            <label for="toggle-intro-2" class="dropdown-label">Report Management</label>
+            <input type="checkbox" id="toggle-intro-2" class="dropdown-input">
+            <div class="dropdown-content">
+                <label ><a href="moviesdetails.html">Movie Details</a></label>
+                <label ><a href="customerdetails.html">Customer Details</a></label>
+                
+            </div>
+        </div>
+       
+    </div>
+    </div>
+    <div class="profile">
+        <i class='bx bxs-x-circle' style='color:#f90202' ></i>
+        <h1>Edit Profile</h1>
+        <form id="profileForm">
+          <label for="profilePicture">Profile Picture:</label>
+          <input type="file" id="profilePicture" name="profilePicture" accept="image/*">
+          <label for="username">Username</label>
+          <input type="text" id="username" name="username">
+          <label for="id_number">id number</label>
+          <input type="text" id="id_number" name="id_number">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email">
+          <label for="Role">Role</label>
+          <input type="text" id="Role" name="Role">
+          <button type="submit">Save Changes</button>
+        </form>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          const profileForm = document.getElementById('profileForm');
+          function getEntryCount() {
+            const entryCount = parseInt(localStorage.getItem('entryCount')) || 0;
+            return entryCount;
+          }
+          function incrementEntryCount() {
+            const currentCount = getEntryCount();
+            localStorage.setItem('entryCount', currentCount + 1);
+          }
+          function getBase64Image(file, callback) {
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onload = function () {
+              callback(reader.result);
+            };
+            reader.onerror = function (error) {
+              console.error('Error occurred while reading the file:', error);
+            };
+          }
+    
+          profileForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const username = document.getElementById('username').value;
+            const id_number = document.getElementById('id_number').value;
+            const email = document.getElementById('email').value;
+            const Role = document.getElementById('Role').value;
+            let profilePicture = null;
+            if (document.getElementById('profilePicture').files.length > 0) {
+              const file = document.getElementById('profilePicture').files[0];
+              getBase64Image(file, function (base64String) {
+                profilePicture = base64String;
+                saveProfileData(profilePicture,username,id_number,email, Role);
+              });
+            } else {
+              saveProfileData(profilePicture, username,id_number, email, Role );
+            }
+          });
+    
+        
+          function saveProfileData(profilePicture,username,id_number, email, Role) {
+           
+            const profile = {
+              id: getEntryCount() + 1, 
+              profilePicture: profilePicture,
+              username: username,
+              id_number:id_number,
+              email: email,
+              Role: Role
+            };
+            localStorage.setItem('profile', JSON.stringify(profile));
+            incrementEntryCount();
+            window.location.href = 'profile.html';
+    
+           
+          }
+        });
+      </script>
+</body>
+</html>

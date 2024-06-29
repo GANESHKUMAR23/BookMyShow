@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="Stylesheet" href="../CSS/main.css">
+    <title>Add Movie</title>
+    <style>
+      #addMovie{
+        width: 200px;
+        background: red;
+        color: white;
+        height: 40px;
+      }
+      .button-container{
+        margin-top: 15px;
+        height: 50px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .button-container button{
+        margin: 0;
+        padding: 0;
+        width: 70px;
+      }
+       
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <span> book
+                <a href="adminhome.html"><i class='bx bxs-camera-movie' style='color:#ed0c0c'  ></i></a>
+                ticket.com</span>
+        </div>
+        <form>
+            <input type="text" placeholder="Search...">
+        </form>
+        <select name="location" id="location">
+            <option value="location1">Location 1</option>
+            <option value="location2">Location 2</option>
+            <option value="location3">Location 3</option>
+        </select>
+        <a href="profile.html" class="usee"><i class='bx bx-user-circle' style='color:#ffffff'  ></i></a>
+    </nav>
+    <div class="container12">
+        <div class="left-box">
+            <h2>Filter</h2>
+            <div class="sidebar">
+                <label for="toggle-intro-1" class="dropdown-label">Movie management</label>
+                <input type="checkbox" id="toggle-intro-1" class="dropdown-input">
+                <div class="dropdown-content">
+                    <label ><a href="admin.html">Movies</a></label>
+                   
+                </div>
+        </div>
+        <div class="sidebar1">
+            <label for="toggle-intro-2" class="dropdown-label">Report Management</label>
+            <input type="checkbox" id="toggle-intro-2" class="dropdown-input">
+            <div class="dropdown-content">
+                <label ><a href="moviesdetails.html">Movie Details</a></label>
+            <label ><a href="customerdetails.html">Customer Details</a></label>
+                
+            </div>
+        </div>
+       
+    </div>
+    </div>
+    <div class="su">
+
+        <div class="container13">
+            <a href="adminhome.html"><i class='bx bxs-x-circle' style='color:#f90202' ></i></a>
+            <h2>Add New Movie</h2>
+            <form id="movieForm">
+
+                <label class="form-label"for="image">Image</label>
+                <input class="form-control"type="file" id="movieImg" name="image" accept="image/*">
+                
+                <label class="form-label"for="title">Title</label>
+                <input class="form-control"type="text" id="title" name="title" required>
+                
+                <label  class="form-label"for="description">Description</label>
+                <textarea  class="form-control"id="description"  rows="4" id="des"></textarea><br>
+
+                <label class="form-label"for="genre">Genre</label>
+                <input class="form-control"type="text" id="genre" name="genre" required>
+                   
+                
+                <label class="form-label"for="language">Language</label>
+                <input class="form-control"type="text" id="language" name="language" required>
+                   
+                
+                <label class="form-label"for="cast">Cast</label>
+                <input class="form-control"type="text" id="cast" name>
+
+                <label class="form-label"for="crew">Crew</label>
+                <input class="form-control"type="text" id="crew" name>
+
+                <label class="form-label"for="price">Price</label>
+                <input class="form-control"type="text" id="price" name>
+                
+                <div class="button-container">
+                    <button type="button" onclick="addMovie()">Add</button>
+                    <!-- <input type="submit" name="button" id="btn" value="Add" onclick="AddRow()"> -->
+                    <button  type="reset">Reset</button>
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    <!-- <table id="show">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Genre</th>
+                <th>Language</th>
+                <th>Cast</th>
+                <th>Crew</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+    </table> -->
+
+    <script src="local.js"></script>
+    <script>
+// function myfunc(event){
+//     event.preventDefault();
+//     var title=document.getElementById("title").value;
+//     var description=document.getElementById("description").value;
+//     var genre=document.getElementById("genre").value;
+   
+//     var language=document.getElementById("language").value;
+  
+//     var cast=document.getElementById("cast").value;
+//     var crew=document.getElementById("crew").value;
+//     var price=document.getElementById("price").value;
+//     localStorage.setItem('Title',title);
+//     localStorage.setItem('Description',description);
+//     localStorage.setItem('Genre',genre);
+//     localStorage.setItem('Language',language);
+//     localStorage.setItem('Cast',cast);
+//     localStorage.setItem('Crew',crew);
+//     localStorage.setItem('Price',price);
+// }
+        // document.getElementById("suBtn").addEventListener("click", function(event) {
+        //     event.preventDefault();
+            
+            // Prevent default form submission
+            
+            // Get form values
+            // var description = document.getElementById("description").value;
+            // var title = document.getElementById("title").value;
+            // var genre = document.getElementById("genre").value;
+            // var language = document.getElementById("language").value;
+            // var cast = document.getElementById("cast").value;
+            // var crew = document.getElementById("crew").value;
+            // var price = document.getElementById("price").value;
+            
+            // Construct string with form data
+            // var movieDetailsString = description + "|" + title + "|" + genre + "|" + language + "|" + cast + "|" + crew + "|" + price;
+            
+            // Store data in localStorage
+            // localStorage.setItem("movieDetails", movieDetailsString);
+            
+            // Redirect to another page
+            // window.location.href = "moviesdetails.html";
+        // })
+
+
+            let img = document.getElementById('movieImg');
+       
+            img.addEventListener('change', () => {
+                console.log("111111111111111111111111111111111111111");
+                let fr = new FileReader();
+                fr.readAsDataURL(img.files[0]);
+                fr.addEventListener('load', () => {
+                    let url = fr.result;
+                    localStorage.setItem("movieImg", url);
+                    console.log(url);
+                });
+            });
+	
+	
+	
+		
+	
+
+
+    </script>
+    </body>
+    </html>
+
+
+
+
+
+
+   
